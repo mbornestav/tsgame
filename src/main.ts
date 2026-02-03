@@ -1,11 +1,15 @@
-﻿const canvas = document.querySelector<HTMLCanvasElement>("#game");
-const scoreEl = document.querySelector<HTMLDivElement>("#score");
-const bestEl = document.querySelector<HTMLDivElement>("#best");
-const messageEl = document.querySelector<HTMLDivElement>("#message");
-
-if (!canvas || !scoreEl || !bestEl || !messageEl) {
-  throw new Error("Missing game elements");
+﻿function mustGet<T extends Element>(selector: string) {
+  const el = document.querySelector<T>(selector);
+  if (!el) {
+    throw new Error(Missing element: );
+  }
+  return el;
 }
+
+const canvas = mustGet<HTMLCanvasElement>("#game");
+const scoreEl = mustGet<HTMLDivElement>("#score");
+const bestEl = mustGet<HTMLDivElement>("#best");
+const messageEl = mustGet<HTMLDivElement>("#message");
 
 const ctx = canvas.getContext("2d");
 if (!ctx) {
@@ -290,3 +294,4 @@ loadBest();
 resize();
 reset();
 requestAnimationFrame(loop);
+
